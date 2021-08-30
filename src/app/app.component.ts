@@ -87,13 +87,13 @@ export class AppComponent implements OnInit{
       this.getEmployees();
     }
   }
-
+  // mode means what the user trying to do
   public onOpenModal(employee: Employee, mode: string): void {
     const container = document.getElementById('main-container');
-    const button = document.createElement('button');
+    const button = document.createElement('button'); // create button
     button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
+    button.style.display = 'none'; // hide unless the user open it
+    button.setAttribute('data-toggle', 'modal'); // set the CSS attributes
     if (mode === 'add') {
       button.setAttribute('data-target', '#addEmployeeModal');
     }
@@ -105,8 +105,8 @@ export class AppComponent implements OnInit{
       this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
-    container?.appendChild(button);
-    button.click();
+    container?.appendChild(button);// passing the button
+    button.click(); // click
   }
 
 }
