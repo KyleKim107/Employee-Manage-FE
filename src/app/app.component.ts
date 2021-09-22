@@ -9,15 +9,15 @@ import { NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
-  
+
 
   constructor(private employeeService: EmployeeService) { }
 
-  ngOnInit(){ // 시작할때 직원들을 가진다
+  ngOnInit() { // 시작할때 직원들을 가진다
     this.getEmployees();
   }
 
@@ -60,10 +60,10 @@ export class AppComponent implements OnInit{
   }
 
   public onDeleteEmloyee(employeeId: number): void {
-    this.employeeService.deleteEmployee(employeeId).subscribe(
+    this.employeeService.deleteEmployee(Number(employeeId) ).subscribe( // after remove the employee
       (response: void) => {
         console.log(response);
-        this.getEmployees();
+        this.getEmployees(); // upload all the employees on the display.
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -76,9 +76,9 @@ export class AppComponent implements OnInit{
     const results: Employee[] = [];
     for (const employee of this.employees) {
       if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.jobtitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || employee.jobtitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(employee);
       }
     }
