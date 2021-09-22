@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -75,16 +75,17 @@ export class AppComponent implements OnInit {
     console.log(key);
     const results: Employee[] = [];
     for (const employee of this.employees) {
-      if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
-        || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
-        || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
-        || employee.jobtitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+      if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 // check name
+        || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 // check email
+        || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1 // phone
+        || employee.jobtitle.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) { // job title
         results.push(employee);
       }
     }
-    this.employees = results;
+    this.employees = results; // push employees in the list.
     if (results.length === 0 || !key) {
-      this.getEmployees();
+      this.getEmployees(); // display all of them.
     }
   }
   // mode means what the user trying to do
