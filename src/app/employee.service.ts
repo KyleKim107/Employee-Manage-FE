@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from './employee';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,12 @@ export class EmployeeService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
+
+  public login(username:string,password:string){
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+                                                              // Binary to ASC
+    return this.http.get<Employee>("http://localhost:8080/",{headers,responseType: 'text' as 'json'})
+  }
 
   public getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiServerUrl}/employee/all`);
